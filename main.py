@@ -1,7 +1,8 @@
-from flask import Flask, Response
-from telegram import Bot
-from dotenv import load_dotenv
 import os
+from flask import Flask, Response
+from telegram import Bot, Update
+from telegram.ext import Application, CommandHandler, ContextTypes
+from dotenv import load_dotenv
 import requests
 from bs4 import BeautifulSoup
 from feedgen.feed import FeedGenerator
@@ -11,17 +12,31 @@ load_dotenv()
 
 # Configuration from environment variables
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-TELEGRAM_CHANNEL_ID = os.getenv('TELEGRAM_CHANNEL_ID')  # e.g., '@yourchannelname'
-SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key')
+TELEGRAM_CHANNEL_ID = os.getenv('TELEGRAM_CHANNEL_ID')
+SECRET_KEY = os.getenv('SECRET_KEY')
+website_url = 'https://skymovieshd.chat/'  # Define the website URL
+
+# Debugging output
+print(f"TELEGRAM_BOT_TOKEN: {TELEGRAM_BOT_TOKEN}")
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Initialize Telegram Bot
+# Initialize Telegram Bot and Application
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
+application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
-# URL of the website to scrape
-website_url = 'https://skymovieshd.chat/'
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text('Welcome! I am your SkymoviesHD RSS Bot. Use /latest to get the latest updates.')
+
+async def latest(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    updates = scrape_website()
+    if updates:
+        for update_info in updates:
+            message = f"**{update_info['title']}**\n{update_info['link']}\n{update_info['description']}"
+            await context.bot.send_message(chat_id=update.effective_chat.id, text=message, parse_mode='Markdown')
+    else:
+        await update.message.reply_text('No updates available at the moment.')
 
 def scrape_website():
     response = requests.get(website_url)
@@ -32,7 +47,7 @@ def scrape_website():
         title = post.select_one('h2.title a').text
         link = post.select_one('h2.title a')['href']
         description = post.select_one('p.description').text
-        
+
         updates.append({
             'title': title,
             'link': link,
@@ -68,4 +83,13 @@ def rss_feed():
     return Response(rss, mimetype='application/rss+xml')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8083)
+    # Set up command handlers
+    application.add_handler(CommandHandler('start', start))
+    application.add_handler(CommandHandler('latest', latest))
+
+    # Start the Bot
+    application.run_polling()
+
+    # Start the Flask app
+    port = int(os.getenv('PORT', 8083))  # Use the PORT environment variable or default to 5000
+    app.run(host='0.0.0.0', port=port)
