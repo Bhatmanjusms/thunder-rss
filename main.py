@@ -61,12 +61,12 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
 ### Step 5: Deploy and Host the Service
-1. **Deploy the Flask app** on a server or a platform like Heroku.
-2. Once deployed, you can access the RSS feed at `http://yourdomain.com/rss`.
+#1. **Deploy the Flask app** on a server or a platform like Heroku.
+#2. Once deployed, you can access the RSS feed at `http://yourdomain.com/rss`.
 
 ### Step 6: Use the RSS Feed in Your Telegram Bot
-Now that you have an RSS feed, you can use the script from my previous message to pull updates from this RSS feed and post them to your Telegram channel.
+#Now that you have an RSS feed, you can use the script from my previous message to pull updates from this RSS feed and post them to your Telegram channel.
 
 ### Notes:
-- The HTML structure of SkymoviesHD might change, so you’ll need to adjust the selectors in the scraper.
-- Be cautious of the website's terms of service when scraping content.
+#- The HTML structure of SkymoviesHD might change, so you’ll need to adjust the selectors in the scraper.
+#- Be cautious of the website's terms of service when scraping content.
