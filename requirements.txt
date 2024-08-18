@@ -1,0 +1,6 @@
+python-telegram-bot
+feedparser
+requests
+beautifulsoup4
+feedgen
+Flask
