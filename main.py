@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 import requests
 from bs4 import BeautifulSoup
 from feedgen.feed import FeedGenerator
-import telegram
 
 # Load environment variables
 load_dotenv()
@@ -16,17 +15,6 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHANNEL_ID = os.getenv('TELEGRAM_CHANNEL_ID')
 SECRET_KEY = os.getenv('SECRET_KEY')
 website_url = 'https://skymovieshd.chat/'  # Define the website URL
-
-token = "7544352972:AAE_jZPyCzO3tr-RO-LSFx6pgTLMT6Ott4U"
-
-bot = telegram.Bot(token=token)
-
-try:
-    # Initialize the bot and perform actions
-    bot.initialize()
-
-except telegram.error.InvalidToken:
-    print("Error: Invalid Telegram bot token. Please check and regenerate if necessary.")
 
 # Debugging output
 print(f"TELEGRAM_BOT_TOKEN: {'TELEGRAM_BOT_TOKEN'}")
