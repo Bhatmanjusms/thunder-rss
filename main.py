@@ -10,7 +10,7 @@ from feedgen.feed import FeedGenerator
 # Load environment variables
 load_dotenv()
 
-# Configuration from environment variables
+# Retrieve environment variables
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHANNEL_ID = os.getenv('TELEGRAM_CHANNEL_ID')
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -91,5 +91,5 @@ if __name__ == '__main__':
     application.run_polling()
 
     # Start the Flask app
-    port = int(os.getenv('PORT', 8083))  # Use the PORT environment variable or default to 5000
+    port = int(os.getenv('PORT', 8080))  # Use the PORT environment variable or default to 5000
     app.run(host='0.0.0.0', port=port)
