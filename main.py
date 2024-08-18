@@ -11,8 +11,8 @@ from feedgen.feed import FeedGenerator
 load_dotenv()
 
 # Retrieve environment variables
-TELEGRAM_BOT_TOKEN = os.getenv("7544352972:AAE_jZPyCzO3tr-RO-LSFx6pgTLMT6Ott4U")
-TELEGRAM_CHANNEL_ID = os.getenv("-1002246046362")
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHANNEL_ID = os.getenv('TELEGRAM_CHANNEL_ID')
 SECRET_KEY = os.getenv('SECRET_KEY')
 website_url = 'https://skymovieshd.chat/'  # Define the website URL
 
@@ -23,8 +23,8 @@ print(f"TELEGRAM_BOT_TOKEN: {TELEGRAM_BOT_TOKEN}")
 app = Flask(__name__)
 
 # Initialize Telegram Bot and Application
-bot = Bot(token=TELEGRAM_BOT_TOKEN)
-application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+bot = Bot(token = "TELEGRAM_BOT_TOKEN")
+application = Application.builder().token("TELEGRAM_BOT_TOKEN").build()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Welcome! I am your SkymoviesHD RSS Bot. Use /latest to get the latest updates.')
