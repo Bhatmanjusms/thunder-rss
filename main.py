@@ -11,8 +11,8 @@ from feedgen.feed import FeedGenerator
 load_dotenv()
 
 # Retrieve environment variables
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")
+TELEGRAM_BOT_TOKEN = os.getenv("7544352972:AAE_jZPyCzO3tr-RO-LSFx6pgTLMT6Ott4U")
+TELEGRAM_CHANNEL_ID = os.getenv("-1002246046362")
 SECRET_KEY = os.getenv('SECRET_KEY')
 website_url = 'https://skymovieshd.chat/'  # Define the website URL
 
