@@ -17,7 +17,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 website_url = 'https://skymovieshd.chat/'  # Define the website URL
 
 # Debugging output
-print(f"TELEGRAM_BOT_TOKEN: {TELEGRAM_BOT_TOKEN}")
+print(f"TELEGRAM_BOT_TOKEN: {'TELEGRAM_BOT_TOKEN'}")
 
 # Initialize Flask app
 app = Flask(__name__)
